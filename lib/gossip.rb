@@ -1,3 +1,4 @@
+
 require 'csv'
 class Gossip
     attr_accessor :author, :content
@@ -20,13 +21,14 @@ class Gossip
         end
         return all_gossips
     end
-
+    
     def self.find(id)
-        puts "petit bonhomme"
-        #return all_gossips[:id]
+        dis_gossip = []
+        CSV.read("./db/gossip.csv").select.with_index {|csv_line, i| dis_gossip << Gossip.new(csv_line[0], csv_line[1]) if i == id}
+        return dis_gossip               
         
     end
-
+    
 end
 
 
